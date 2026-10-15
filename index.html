@@ -1,269 +1,323 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>PayPal ke Rupiah - Kalkulator USD ke IDR</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            color: #1e293b;
-        }
-
-        .container {
-            max-width: 480px;
-            margin: 40px auto;
-            padding: 28px;
-            background: white;
-            border-radius: 18px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-        }
-
-        h1 {
-            text-align: center;
-            color: #003087;
-            margin-bottom: 8px;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #64748b;
-            margin-bottom: 30px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin: 18px 0 8px;
-        }
-
-        input {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #cbd5e1;
-            border-radius: 9px;
-            font-size: 16px;
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            margin-top: 24px;
-            border: none;
-            border-radius: 9px;
-            background: #0070ba;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #003087;
-        }
-
-        .result {
-            margin-top: 24px;
-            padding: 20px;
-            background: #eff6ff;
-            border-radius: 12px;
-        }
-
-        .result h2 {
-            margin-top: 0;
-            color: #003087;
-            font-size: 17px;
-        }
-
-        .amount {
-            font-size: 27px;
-            font-weight: bold;
-            color: #047857;
-            overflow-wrap: anywhere;
-        }
-
-        .detail {
-            margin-top: 12px;
-            line-height: 1.8;
-        }
-
-        .note {
-            margin-top: 22px;
-            color: #64748b;
-            font-size: 12px;
-            line-height: 1.6;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 25px;
-            color: #94a3b8;
-            font-size: 12px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="description" content="Kalkulator konversi saldo PayPal ke Rupiah, informasi layanan, dan kontak transaksi.">
+  <title>PayPal ke Rupiah | Layanan & Kalkulator</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --ink: #152238;
+      --muted: #68758b;
+      --navy: #0b1220;
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --mint: #19c59a;
+      --line: #e4eaf2;
+      --white: #fff;
+      --shadow: 0 18px 55px rgba(18, 38, 72, .10);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink); background: var(--bg); line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, calc(100% - 36px)); margin: auto; }
+    .topbar { background: var(--navy); color: #d7e2f2; font-size: 13px; text-align: center; padding: 9px 16px; }
+    header { background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(12px); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 850; letter-spacing: -.4px; }
+    .brand-mark { display: grid; place-items: center; width: 42px; height: 42px; color: #fff; background: linear-gradient(135deg, var(--blue), #6d5dfc); border-radius: 14px; font-size: 20px; box-shadow: 0 7px 18px #2563eb33; }
+    .brand small { display: block; color: var(--muted); font-size: 11px; font-weight: 650; letter-spacing: 1.2px; text-transform: uppercase; margin-top: -3px; }
+    .nav-links { display: flex; align-items: center; gap: 27px; color: #526077; font-size: 14px; font-weight: 650; }
+    .nav-links a:hover { color: var(--blue); }
+    .btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; border: 0; border-radius: 12px; padding: 13px 18px; font: inherit; font-weight: 750; cursor: pointer; transition: transform .18s, background .18s; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { color: white; background: var(--blue); box-shadow: 0 9px 20px #2563eb2a; }
+    .btn-primary:hover { background: var(--blue-dark); }
+    .btn-dark { background: var(--navy); color: #fff; }
+    .btn-light { color: var(--blue); background: #edf3ff; }
+    .hero { background: radial-gradient(circle at 80% 20%, #263d78 0, transparent 35%), linear-gradient(130deg, #0b1220, #121f3d 72%, #172a50); color: #fff; padding: 74px 0 86px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 58px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; border: 1px solid #ffffff2e; color: #c9d8ff; background: #ffffff0c; padding: 7px 12px; border-radius: 999px; font-size: 12px; font-weight: 750; letter-spacing: .4px; }
+    .status-dot { width: 7px; height: 7px; background: var(--mint); border-radius: 50%; box-shadow: 0 0 0 4px #19c59a22; }
+    h1 { font-size: clamp(36px, 5vw, 58px); line-height: 1.08; letter-spacing: -2px; margin: 20px 0 18px; }
+    .hero p { color: #bdc9de; max-width: 570px; font-size: 17px; margin: 0 0 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero .btn-light { background: #ffffff12; color: #fff; border: 1px solid #ffffff2b; }
+    .hero-points { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 28px; color: #d7e2f2; font-size: 13px; }
+    .hero-points span::before { content: "✓"; color: #61e3bc; margin-right: 7px; font-weight: 900; }
+    .calculator { background: #fff; color: var(--ink); padding: 26px; border-radius: 24px; box-shadow: 0 25px 70px #0004; }
+    .card-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; margin-bottom: 20px; }
+    .card-heading h2 { margin: 0; font-size: 21px; letter-spacing: -.5px; }
+    .card-heading p { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+    .pill { font-size: 11px; font-weight: 800; padding: 6px 9px; border-radius: 8px; background: #eafaf4; color: #087d5c; white-space: nowrap; }
+    label { display: block; font-size: 13px; font-weight: 750; margin-bottom: 7px; color: #45536a; }
+    .field { margin-bottom: 15px; }
+    .input-wrap { display: flex; align-items: center; border: 1px solid #dce4ef; background: #fbfcfe; border-radius: 12px; padding: 0 13px; transition: border .2s, box-shadow .2s; }
+    .input-wrap:focus-within { border-color: var(--blue); box-shadow: 0 0 0 3px #2563eb15; }
+    .prefix { font-weight: 800; color: #748198; }
+    input { width: 100%; border: 0; outline: 0; background: transparent; padding: 14px 9px; font: inherit; font-weight: 700; color: var(--ink); min-width: 0; }
+    .result { margin: 19px 0 15px; padding: 19px; border-radius: 16px; background: linear-gradient(135deg, #eff6ff, #f1fbf8); border: 1px solid #dceafa; }
+    .result-label { color: #5d6b81; font-size: 12px; font-weight: 750; }
+    .result-amount { font-size: clamp(27px, 4vw, 36px); font-weight: 900; letter-spacing: -1px; color: #1647b8; line-height: 1.25; margin: 5px 0 8px; overflow-wrap: anywhere; }
+    .result-note { font-size: 12px; color: #64748b; }
+    .calc-meta { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--muted); margin: 10px 0 18px; }
+    .calculator .btn { width: 100%; }
+    .fineprint { font-size: 11px; color: #8490a3; text-align: center; margin: 12px 0 0; }
+    section { padding: 76px 0; }
+    .section-head { text-align: center; max-width: 650px; margin: 0 auto 38px; }
+    .section-kicker { text-transform: uppercase; letter-spacing: 1.6px; font-size: 11px; color: var(--blue); font-weight: 900; }
+    h2.section-title { margin: 9px 0 12px; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.15; letter-spacing: -1.2px; }
+    .section-head p { color: var(--muted); margin: 0; }
+    .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .service-card { background: #fff; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 8px 30px #203b6310; }
+    .service-icon { width: 48px; height: 48px; display: grid; place-items: center; background: #edf3ff; border-radius: 15px; font-size: 22px; margin-bottom: 18px; }
+    .service-card h3 { margin: 0 0 8px; font-size: 18px; }
+    .service-card p { color: var(--muted); font-size: 14px; margin: 0; }
+    .steps-section { background: #fff; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+    .step { padding: 8px 10px; }
+    .step-number { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 13px; background: var(--navy); color: #fff; font-weight: 900; margin-bottom: 16px; }
+    .step h3 { margin: 0 0 7px; font-size: 17px; }
+    .step p { color: var(--muted); font-size: 14px; margin: 0; }
+    .notice { margin-top: 32px; padding: 18px 20px; border-radius: 14px; background: #fff8e7; border: 1px solid #f4e3b4; color: #79591b; font-size: 13px; }
+    .faq-list { max-width: 800px; margin: auto; display: grid; gap: 12px; }
+    details { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+    summary { font-weight: 800; cursor: pointer; }
+    details p { color: var(--muted); font-size: 14px; margin: 12px 0 0; }
+    .cta { padding: 0 0 76px; }
+    .cta-box { border-radius: 26px; padding: 42px; background: linear-gradient(120deg, #12306b, #0b1220); color: white; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .cta-box h2 { margin: 0 0 8px; font-size: clamp(25px, 3vw, 34px); letter-spacing: -.8px; }
+    .cta-box p { margin: 0; color: #c3d0e6; }
+    footer { background: #080e19; color: #aab6c8; padding: 30px 0; font-size: 13px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .footer-brand { color: white; font-weight: 850; }
+    .wa-float { position: fixed; right: 20px; bottom: 20px; z-index: 20; width: 56px; height: 56px; display: grid; place-items: center; background: #16a765; color: white; border-radius: 50%; font-size: 25px; box-shadow: 0 10px 28px #0003; }
+    .wa-float:hover { transform: translateY(-2px); }
+    @media (max-width: 850px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+      .hero { padding: 55px 0 64px; }
+      .calculator { max-width: 600px; }
+      .services { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; gap: 20px; }
+      .cta-box { align-items: flex-start; flex-direction: column; padding: 30px; }
+      .nav-links { gap: 14px; }
+    }
+    @media (max-width: 560px) {
+      .container { width: min(100% - 26px, 1120px); }
+      .nav { min-height: 66px; }
+      .nav-links a:not(.nav-contact) { display: none; }
+      .nav-contact { padding: 10px 12px; font-size: 12px; }
+      .brand { font-size: 14px; }
+      .brand-mark { width: 37px; height: 37px; }
+      h1 { letter-spacing: -1.3px; }
+      .hero p { font-size: 15px; }
+      .calculator { padding: 20px; }
+      section { padding: 58px 0; }
+      .cta { padding-bottom: 58px; }
+      .cta-box { padding: 26px; }
+    }
+  </style>
 </head>
-
 <body>
-
-<div class="container">
-
-    <h1>PayPal ke Rupiah</h1>
-
-    <p class="subtitle">
-        Kalkulator konversi USD ke IDR
-    </p>
-
-    <label for="usd">Nominal PayPal (USD)</label>
-    <input
-        type="number"
-        id="usd"
-        min="0"
-        step="any"
-        value="100"
-        placeholder="Contoh: 100"
-    >
-
-    <label for="rate">Kurs USD ke IDR (Rp)</label>
-    <input
-        type="number"
-        id="rate"
-        min="0"
-        step="any"
-        value="16500"
-    >
-
-    <label for="feePercent">Biaya PayPal (%)</label>
-    <input
-        type="number"
-        id="feePercent"
-        min="0"
-        max="100"
-        step="any"
-        value="0"
-    >
-
-    <label for="fixedFee">Biaya tetap (USD)</label>
-    <input
-        type="number"
-        id="fixedFee"
-        min="0"
-        step="any"
-        value="0"
-    >
-
-    <button onclick="hitung()">
-        Hitung Konversi
-    </button>
-
-    <div class="result" aria-live="polite">
-
-        <h2>Hasil Perhitungan</h2>
-
-        <div id="hasil" class="amount">
-            Rp0
-        </div>
-
-        <div class="detail">
-            <div>Nominal awal: <span id="awal">$0.00</span></div>
-            <div>Biaya: <span id="biaya">$0.00</span></div>
-            <div>Nominal bersih: <span id="bersih">$0.00</span></div>
-            <div>Kurs: <span id="kursInfo">Rp16.500</span> / USD</div>
-        </div>
-
+  <div class="topbar">Layanan digital praktis • Kurs dapat berubah sewaktu-waktu</div>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#beranda" aria-label="Beranda">
+        <span class="brand-mark">↗</span>
+        <span>PAYPAL RUPIAH<small>Digital service</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Navigasi utama">
+        <a href="#layanan">Layanan</a>
+        <a href="#cara-kerja">Cara Kerja</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-primary nav-contact wa-link" href="#">Hubungi Kami ↗</a>
+      </nav>
     </div>
+  </header>
 
-    <p class="note">
-        Catatan: Kurs awal hanya contoh dan bukan kurs real-time.
-        Masukkan kurs yang ingin digunakan. Biaya PayPal dapat
-        berbeda tergantung jenis transaksi dan akun.
-        Hasil ini merupakan estimasi, bukan nilai pencairan resmi.
-    </p>
+  <main>
+    <section class="hero" id="beranda">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="status-dot"></span> KALKULATOR PAYPAL KE RUPIAH</div>
+          <h1>Saldo PayPal jadi Rupiah, <span style="color:#82aaff">lebih mudah.</span></h1>
+          <p>Hitung perkiraan nilai saldo PayPal kamu sebelum transaksi. Cek estimasi konversi, pelajari layanan kami, lalu hubungi admin untuk konfirmasi kurs dan ketentuan terbaru.</p>
+          <div class="hero-actions">
+            <a href="#kalkulator" class="btn btn-primary">Hitung Sekarang ↓</a>
+            <a href="#layanan" class="btn btn-light">Lihat Layanan</a>
+          </div>
+          <div class="hero-points"><span>Perhitungan transparan</span><span>Mudah digunakan</span><span>Responsif di HP</span></div>
+        </div>
 
-    <footer>
-        Kalkulator PayPal ke Rupiah
-    </footer>
+        <div class="calculator" id="kalkulator">
+          <div class="card-heading">
+            <div><h2>Kalkulator PayPal</h2><p>Estimasi konversi USD ke IDR</p></div>
+            <span class="pill">KALKULATOR</span>
+          </div>
+          <div class="field">
+            <label for="usd">Nominal saldo (USD)</label>
+            <div class="input-wrap"><span class="prefix">$</span><input id="usd" type="number" min="0" step="0.01" value="100" inputmode="decimal"></div>
+          </div>
+          <div class="field">
+            <label for="rate">Kurs USD ke IDR (Rp)</label>
+            <div class="input-wrap"><span class="prefix">Rp</span><input id="rate" type="number" min="1" step="1" value="16500" inputmode="numeric"></div>
+          </div>
+          <div class="field">
+            <label for="feePercent">Biaya layanan (%)</label>
+            <div class="input-wrap"><input id="feePercent" type="number" min="0" max="100" step="0.1" value="0" inputmode="decimal"><span class="prefix">%</span></div>
+          </div>
+          <div class="field">
+            <label for="feeFixed">Biaya tetap (USD)</label>
+            <div class="input-wrap"><span class="prefix">$</span><input id="feeFixed" type="number" min="0" step="0.01" value="0" inputmode="decimal"></div>
+          </div>
+          <div class="result" aria-live="polite">
+            <div class="result-label">ESTIMASI RUPIAH DITERIMA</div>
+            <div class="result-amount" id="idrResult">Rp1.650.000</div>
+            <div class="result-note" id="resultDetail">Perkiraan setelah biaya layanan.</div>
+          </div>
+          <div class="calc-meta"><span>Biaya terhitung: <strong id="feeResult">Rp0</strong></span><span>Estimasi saja</span></div>
+          <a class="btn btn-primary wa-link" id="orderBtn" href="#">Tanyakan Transaksi via WhatsApp ↗</a>
+          <p class="fineprint">Hasil bukan penawaran final. Konfirmasi kurs, biaya, dan syarat transaksi kepada admin.</p>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <section id="layanan">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Layanan Kami</div>
+          <h2 class="section-title">Bantuan transaksi digital dalam satu tempat</h2>
+          <p>Bagian ini bisa kamu sesuaikan dengan layanan yang benar-benar tersedia. Hubungi admin untuk memastikan ketersediaan, biaya, dan prosesnya.</p>
+        </div>
+        <div class="services">
+          <article class="service-card"><div class="service-icon">💱</div><h3>Convert PayPal</h3><p>Hitung estimasi saldo USD ke Rupiah dan tanyakan kurs transaksi terbaru sebelum melakukan konversi.</p></article>
+          <article class="service-card"><div class="service-icon">💳</div><h3>Top Up PayPal</h3><p>Butuh saldo PayPal? Hubungi admin untuk mengecek ketersediaan layanan, nominal, serta ketentuannya.</p></article>
+          <article class="service-card"><div class="service-icon">🤝</div><h3>Konsultasi Transaksi</h3><p>Ajukan pertanyaan tentang proses transaksi, estimasi biaya, dan informasi yang perlu disiapkan.</p></article>
+        </div>
+      </div>
+    </section>
 
-<script>
-    function formatRupiah(angka) {
-        return new Intl.NumberFormat("id-ID", {
-            style: "currency",
-            currency: "IDR",
-            maximumFractionDigits: 0
-        }).format(angka);
+    <section class="steps-section" id="cara-kerja">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Cara Kerja</div>
+          <h2 class="section-title">Mulai dalam tiga langkah</h2>
+          <p>Gunakan kalkulator sebagai perkiraan awal. Nilai final harus dikonfirmasi dengan admin sebelum transaksi.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><div class="step-number">01</div><h3>Masukkan nominal</h3><p>Isi saldo USD, kurs yang ingin digunakan, serta biaya layanan bila ada.</p></article>
+          <article class="step"><div class="step-number">02</div><h3>Cek hasil estimasi</h3><p>Kalkulator langsung menampilkan perkiraan Rupiah setelah biaya yang kamu masukkan.</p></article>
+          <article class="step"><div class="step-number">03</div><h3>Konfirmasi ke admin</h3><p>Tekan tombol WhatsApp untuk menanyakan kurs, prosedur, dan ketentuan transaksi terkini.</p></article>
+        </div>
+        <div class="notice"><strong>Catatan penting:</strong> Kurs dan biaya dapat berubah. Jangan pernah membagikan kata sandi, kode OTP, atau kode pemulihan akun PayPal kepada siapa pun.</div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">FAQ</div>
+          <h2 class="section-title">Pertanyaan yang sering diajukan</h2>
+          <p>Informasi singkat sebelum kamu menghubungi admin.</p>
+        </div>
+        <div class="faq-list">
+          <details><summary>Apakah hasil kalkulator merupakan kurs final?</summary><p>Bukan. Hasilnya hanya estimasi berdasarkan kurs dan biaya yang kamu masukkan. Tanyakan kurs dan jumlah final kepada admin sebelum transaksi.</p></details>
+          <details><summary>Bagaimana cara mengubah kurs?</summary><p>Ubah angka pada kolom “Kurs USD ke IDR”. Hasil perhitungan akan diperbarui otomatis.</p></details>
+          <details><summary>Bagaimana biaya layanan dihitung?</summary><p>Biaya persentase dihitung dari nominal USD, kemudian ditambah biaya tetap USD jika kamu mengisinya. Masukkan biaya sesuai ketentuan yang sudah dikonfirmasi.</p></details>
+          <details><summary>Informasi apa yang aman untuk dibagikan?</summary><p>Bagikan hanya informasi transaksi yang memang diperlukan. Jangan pernah memberikan kata sandi, OTP, atau kode pemulihan akun.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <div><h2>Ingin konfirmasi kurs hari ini?</h2><p>Hubungi admin untuk mengecek kurs, biaya, dan proses transaksi terbaru.</p></div>
+          <a class="btn btn-primary wa-link" href="#">Chat Admin di WhatsApp ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div><div class="footer-brand">PAYPAL RUPIAH</div><div>Website kalkulator dan informasi layanan digital.</div></div>
+      <div>© <span id="year"></span> PayPal Rupiah. Sesuaikan nama brand sebelum dipublikasikan.</div>
+    </div>
+  </footer>
+  <a class="wa-float wa-link" href="#" aria-label="Hubungi kami melalui WhatsApp" title="WhatsApp">✆</a>
+
+  <script>
+    // GANTI nomor di bawah dengan nomor WhatsApp kamu.
+    // Gunakan kode negara tanpa tanda +, spasi, atau strip. Contoh Indonesia: 6281234567890
+    const WHATSAPP_NUMBER = "6281234567890";
+
+    const usdInput = document.getElementById("usd");
+    const rateInput = document.getElementById("rate");
+    const feePercentInput = document.getElementById("feePercent");
+    const feeFixedInput = document.getElementById("feeFixed");
+    const idrResult = document.getElementById("idrResult");
+    const feeResult = document.getElementById("feeResult");
+    const resultDetail = document.getElementById("resultDetail");
+
+    const rupiah = value => new Intl.NumberFormat("id-ID", {
+      style: "currency", currency: "IDR", maximumFractionDigits: 0
+    }).format(Math.max(0, value));
+
+    const numberFormat = value => new Intl.NumberFormat("id-ID", {
+      maximumFractionDigits: 2
+    }).format(value);
+
+    function calculate() {
+      const usd = Math.max(0, Number(usdInput.value) || 0);
+      const rate = Math.max(0, Number(rateInput.value) || 0);
+      const percent = Math.min(100, Math.max(0, Number(feePercentInput.value) || 0));
+      const fixed = Math.max(0, Number(feeFixedInput.value) || 0);
+      const percentFee = usd * percent / 100;
+      const totalFeeUsd = Math.min(usd, percentFee + fixed);
+      const netUsd = Math.max(0, usd - totalFeeUsd);
+      const received = netUsd * rate;
+      const feeIdr = totalFeeUsd * rate;
+
+      idrResult.textContent = rupiah(received);
+      feeResult.textContent = rupiah(feeIdr);
+      resultDetail.textContent = `${numberFormat(netUsd)} USD setelah biaya × kurs ${rupiah(rate)} per USD.`;
+
+      const message = `Halo admin, saya ingin menanyakan transaksi PayPal ke Rupiah.%0A` +
+        `Nominal: $${numberFormat(usd)}%0A` +
+        `Kurs estimasi: Rp${numberFormat(rate)} per USD%0A` +
+        `Biaya layanan: ${numberFormat(percent)}% + $${numberFormat(fixed)}%0A` +
+        `Estimasi diterima: ${rupiah(received)}%0A` +
+        `Mohon info kurs dan ketentuan terbaru.`;
+      document.getElementById("orderBtn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
     }
 
-    function hitung() {
-        const usd = Number(document.getElementById("usd").value);
-        const rate = Number(document.getElementById("rate").value);
-        const feePercent = Number(
-            document.getElementById("feePercent").value
-        );
-        const fixedFee = Number(
-            document.getElementById("fixedFee").value
-        );
-
-        if (
-            !Number.isFinite(usd) ||
-            !Number.isFinite(rate) ||
-            !Number.isFinite(feePercent) ||
-            !Number.isFinite(fixedFee) ||
-            usd <= 0 ||
-            rate <= 0 ||
-            feePercent < 0 ||
-            feePercent > 100 ||
-            fixedFee < 0
-        ) {
-            alert("Periksa kembali nominal, kurs, dan biaya.");
-            return;
-        }
-
-        const biaya = Math.min(
-            usd,
-            usd * feePercent / 100 + fixedFee
-        );
-
-        const bersih = usd - biaya;
-        const rupiah = bersih * rate;
-
-        document.getElementById("hasil").textContent =
-            formatRupiah(rupiah);
-
-        document.getElementById("awal").textContent =
-            "$" + usd.toLocaleString("en-US", {
-                maximumFractionDigits: 2
-            });
-
-        document.getElementById("biaya").textContent =
-            "$" + biaya.toLocaleString("en-US", {
-                maximumFractionDigits: 2
-            });
-
-        document.getElementById("bersih").textContent =
-            "$" + bersih.toLocaleString("en-US", {
-                maximumFractionDigits: 2
-            });
-
-        document.getElementById("kursInfo").textContent =
-            formatRupiah(rate);
-    }
-
-    document.querySelectorAll("input").forEach(function(input) {
-        input.addEventListener("input", hitung);
+    [usdInput, rateInput, feePercentInput, feeFixedInput].forEach(input => {
+      input.addEventListener("input", calculate);
     });
 
-    hitung();
-</script>
+    function setWhatsAppLinks() {
+      const validNumber = /^\d{8,15}$/.test(WHATSAPP_NUMBER);
+      const message = encodeURIComponent("Halo, saya ingin bertanya tentang layanan PayPal ke Rupiah.");
+      document.querySelectorAll(".wa-link:not(#orderBtn)").forEach(link => {
+        link.href = validNumber ? `https://wa.me/${WHATSAPP_NUMBER}?text=${message}` : "#";
+        if (!validNumber) link.addEventListener("click", event => {
+          event.preventDefault();
+          alert("Admin belum mengatur nomor WhatsApp. Edit WHATSAPP_NUMBER di bagian script index.html.");
+        });
+      });
+    }
 
+    document.getElementById("year").textContent = new Date().getFullYear();
+    calculate();
+    setWhatsAppLinks();
+  </script>
 </body>
 </html>
