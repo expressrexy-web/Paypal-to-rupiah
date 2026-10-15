@@ -133,7 +133,7 @@
         <a href="#layanan">Layanan</a>
         <a href="#cara-kerja">Cara Kerja</a>
         <a href="#faq">FAQ</a>
-        <a class="btn btn-primary nav-contact wa-link" href="#">Hubungi Kami ↗</a>
+        <a class="btn btn-primary nav-contact wa-link" href="https://wa.me/6285718054660?text=Halo%20Rey%20PayPal%20Service%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20Convert%20atau%20Top%20Up%20PayPal.">Hubungi Kami ↗</a>
       </nav>
     </div>
   </header>
@@ -146,7 +146,7 @@
           <h1>Saldo PayPal jadi Rupiah, <span style="color:#82aaff">lebih mudah.</span></h1>
           <p>Hitung perkiraan nilai saldo PayPal kamu sebelum transaksi. Cek estimasi konversi, pelajari layanan kami, lalu hubungi admin untuk konfirmasi kurs dan ketentuan terbaru.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary wa-link" href="#">Hubungi via WhatsApp ↗</a>
+            <a class="btn btn-primary wa-link" href="https://wa.me/6285718054660?text=Halo%20Rey%20PayPal%20Service%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20Convert%20atau%20Top%20Up%20PayPal.">Hubungi via WhatsApp ↗</a>
             <a href="#layanan" class="btn btn-light">Lihat Layanan</a>
           </div>
           <div class="hero-points"><span>Perhitungan transparan</span><span>Mudah digunakan</span><span>Responsif di HP</span></div>
@@ -207,7 +207,7 @@
       <div class="container">
         <div class="cta-box">
           <div><h2>Ingin konfirmasi kurs hari ini?</h2><p>Hubungi admin untuk mengecek kurs, biaya, dan proses transaksi terbaru.</p></div>
-          <a class="btn btn-primary wa-link" href="#">Chat Admin di WhatsApp ↗</a>
+          <a class="btn btn-primary wa-link" href="https://wa.me/6285718054660?text=Halo%20Rey%20PayPal%20Service%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20Convert%20atau%20Top%20Up%20PayPal.">Chat Admin di WhatsApp ↗</a>
         </div>
       </div>
     </section>
@@ -219,19 +219,14 @@
       <div>© <span id="year"></span> Rey PayPal Service. Sesuaikan nama brand sebelum dipublikasikan.</div>
     </div>
   </footer>
-  <a class="wa-float wa-link" href="#" aria-label="Hubungi kami melalui WhatsApp" title="WhatsApp">✆</a>
+  <a class="wa-float wa-link" href="https://wa.me/6285718054660?text=Halo%20Rey%20PayPal%20Service%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20Convert%20atau%20Top%20Up%20PayPal." aria-label="Hubungi kami melalui WhatsApp" title="Chat WhatsApp">WhatsApp</a>
 
   <script>
-    // Nomor WhatsApp admin dalam format internasional tanpa tanda +.
-    const WHATSAPP_NUMBER = "6285718054660";
-    const validNumber = /^\d{8,15}$/.test(WHATSAPP_NUMBER);
-    const message = encodeURIComponent("Halo Rey PayPal Service, saya ingin bertanya tentang layanan Convert atau Top Up PayPal.");
+    const whatsappLink = "https://wa.me/6285718054660?text=Halo%20Rey%20PayPal%20Service%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20Convert%20atau%20Top%20Up%20PayPal.";
     document.querySelectorAll(".wa-link").forEach(link => {
-      link.href = validNumber ? `https://wa.me/${WHATSAPP_NUMBER}?text=${message}` : "#";
-      if (!validNumber) link.addEventListener("click", event => {
-        event.preventDefault();
-        alert("Nomor WhatsApp belum diatur dengan benar di index.html.");
-      });
+      link.href = whatsappLink;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
     });
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
