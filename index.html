@@ -224,7 +224,7 @@
   <script>
     // Nomor WhatsApp admin dalam format internasional tanpa tanda +.
     const WHATSAPP_NUMBER = "6285718054660";
-    const validNumber = /^\\d{8,15}$/.test(WHATSAPP_NUMBER);
+    const validNumber = /^\d{8,15}$/.test(WHATSAPP_NUMBER);
     const message = encodeURIComponent("Halo Rey PayPal Service, saya ingin bertanya tentang layanan Convert atau Top Up PayPal.");
     document.querySelectorAll(".wa-link").forEach(link => {
       link.href = validNumber ? `https://wa.me/${WHATSAPP_NUMBER}?text=${message}` : "#";
